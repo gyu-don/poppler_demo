@@ -13,9 +13,7 @@ def dump_image(path):
     doc.setRenderHint(Poppler.Document.TextAntialiasing)
     filename_fmt = os.path.splitext(path)[0] + '_{0}' + EXT
     for n,page in ((i+1, doc.page(i)) for i in range(doc.numPages())):
-        f = QtCore.QFile(filename_fmt.format(n))
-        with closing(f.open(QtCore.QIODevice.WriteOnly) and f):
-            page.renderToImage().save(f, FORMAT)
+        page.renderToImage().save(filename_fmt.format(n), FORMAT)
 
 if __name__ == '__main__':
     app = QtCore.QCoreApplication(sys.argv)
